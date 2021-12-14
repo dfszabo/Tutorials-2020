@@ -28,7 +28,8 @@
               -unpause
               -urdf
               -model robot
-              -param robot_description"/>
+              -param robot_description"
+  />
 
   <!-- load multiple values stored in .yaml file into global parameters -->
   <!-- parameters store motor controller configurations -->
@@ -40,9 +41,19 @@
         pkg="controller_manager"
         type="spawner"
         args="joint_state_controller
-              right_arm_controller
-              left_arm_controller
-              head_controller" />
+              left_back_leg_1_controller
+              left_back_leg_2_controller
+              left_mid_leg_1_controller
+              left_mid_leg_2_controller
+              left_front_leg_1_controller
+              left_front_leg_2_controller
+              right_back_leg_1_controller
+              right_back_leg_2_controller
+              right_mid_leg_1_controller
+              right_mid_leg_2_controller
+              right_front_leg_1_controller
+              right_front_leg_2_controller"
+  />
 </launch>
 
 

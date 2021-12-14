@@ -2,29 +2,48 @@
 
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="my_robot">
 
-    <xacro:include filename="$(find tutorial)/urdf/arm.xacro" />
+    <xacro:include filename="$(find tutorial)/urdf/leg.xacro" />
     <xacro:include filename="$(find tutorial)/urdf/head.xacro" />
-    
+    <xacro:include filename="$(find tutorial)/urdf/constants.xacro" />
+
     <link name="base_link">
         <visual>
+            <origin xyz="0 0 ${robot_body_height/2 + start_height}" rpy="0 0 0"/>
             <geometry>
-                <box size="1 1 1"/>
+                <box size="${robot_body_width*3} ${robot_body_width} ${robot_body_height}"/>
             </geometry>
         </visual>
         <collision>
+            <origin xyz="0 0 ${robot_body_height/2 + start_height}" rpy="0 0 0"/>
             <geometry>
-                <box size="1 1 1"/>
+                <box size="${robot_body_width*3} ${robot_body_width} ${robot_body_height}"/>
             </geometry>
+            <surface>
+              <friction>
+                <ode>
+                  <mu>10000.0</mu>
+                  <mu2>10000.0</mu2>
+                </ode>
+              </friction>
+              <contact>
+                <ode>
+                  <min_depth>0.03</min_depth>
+                </ode>
+              </contact>
+            </surface>
         </collision>
         <inertial>
-            <mass value="1"/>
+            <mass value="${mass}"/>
             <inertia ixx="0.21" ixy="0" ixz="0" iyy="0.27" iyz="0" izz="0.10"/>
         </inertial>
     </link>
     
-    <xacro:arm prefix="right" length=".7" radius=".2" reflect="1" />
-    <xacro:arm prefix="left" length=".7" radius=".2" reflect="-1" />
-    <xacro:head />
+    <xacro:leg prefix="left_back" position="-1" reflect="1" mirror="0" />
+    <xacro:leg prefix="left_mid" position="0" reflect="1" mirror="0" />
+    <xacro:leg prefix="left_front" position="1" reflect="1" mirror="0" />
+    <xacro:leg prefix="right_back" position="-1" reflect="-1" mirror="1" />
+    <xacro:leg prefix="right_mid" position="0" reflect="-1" mirror="1" />
+    <xacro:leg prefix="right_front" position="1" reflect="-1" mirror="1" />
     
     <!-- Add ROS plugin so we can interact with our robot -->
     <gazebo>

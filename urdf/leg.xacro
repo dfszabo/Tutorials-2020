@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="my_robot">
+<xacro:macro name="leg" params="prefix position reflect mirror">
+
+    <!-- rpy (roll pitch yaw) describes rotation in radians -->
+    <!-- xyz describes translation in meters -->
+
+  <link name="${prefix}_leg">
+    <collision>
+      <origin xyz="0 0 ${-leg_height/2 - axel_offset}" rpy="0 0 0"/>
+      <geometry>
+	      <box size="${leg_width} ${leg_width} ${leg_height}"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>10000.0</mu>
+            <mu2>10000.0</mu2>
+          </ode>
+        </friction>
+        <contact>
+          <ode>
+            <min_depth>0.03</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
+
+    <visual>
+      <origin xyz="0 0 ${-leg_height/2 - axel_offset}" rpy="0 0 0"/>
+      <geometry>
+	      <box size="${leg_width} ${leg_width} ${leg_height}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="0 0 ${-leg_height/2 - axel_offset}" rpy="0 0 0"/>
+      <mass value="${mass/10}"/>
+      <inertia ixx="0.06" ixy="0.0" ixz="0.0" iyy="0.06" iyz="0.0" izz="0.25"/>
+    </inertial>
+  </link>
+
+  <joint name="${prefix}_leg_joint_1" type="continuous">
+    <parent link="base_link"/>
+    <child link="${prefix}_leg"/>
+    <origin xyz="${position * robot_body_width} ${reflect * robot_body_width/2} ${start_height + robot_body_height/2 - axel_offset}" rpy="${1 * PI/3} 0 ${mirror * PI}"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="30" lower="${-PI/6}" upper="${PI/6}" velocity="1"/>
+  </joint>
+
+  <!-- leg_1_link_2 -->
+  <link name="${prefix}_leg_link_2">
+    <collision>
+      <origin xyz="${leg_width/2} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
+      <geometry>
+	      <box size="${leg_width} ${leg_width} ${leg_height}"/>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>10000.0</mu>
+            <mu2>10000.0</mu2>
+          </ode>
+        </friction>
+        <contact>
+          <ode>
+            <min_depth>0.03</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
+
+    <visual>
+      <origin xyz="${leg_width/2} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
+      <geometry>
+	      <box size="${leg_width} ${leg_width} ${leg_height}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="${leg_width/2} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
+      <mass value="${mass/10}"/>
+      <inertia ixx="0.06" ixy="0.0" ixz="0.0" iyy="0.06" iyz="0.0" izz="0.25"/>
+    </inertial>
+  </link>
+
+  <joint name="${prefix}_leg_joint_2" type="continuous">
+    <parent link="${prefix}_leg"/>
+    <child link="${prefix}_leg_link_2"/>
+    <origin xyz="${leg_width/2} 0 ${-leg_height + leg_width/2}" rpy="${-PI/3} 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit effort="30" velocity="0.03"/>
+  </joint>
+
+    <transmission name="${prefix}_leg_transmission_1">
+        <type>transmission_interface/SimpleTransmission</type>
+        <actuator name="$${prefix}_motor_1">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+        <joint name="${prefix}_leg_joint_1">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+    </transmission>
+
+    <transmission name="${prefix}_leg_transmission_2">
+        <type>transmission_interface/SimpleTransmission</type>
+        <actuator name="$${prefix}_motor_2">
+            <mechanicalReduction>1</mechanicalReduction>
+        </actuator>
+        <joint name="${prefix}_leg_joint_2">
+            <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+        </joint>
+    </transmission>
+
+</xacro:macro>
+</robot>
+
