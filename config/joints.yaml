@@ -10,6 +10,10 @@ left_back_leg_2_controller:
   type: "position_controllers/JointPositionController"
   joint: left_back_leg_joint_2
 
+left_back_leg_3_controller:
+  type: "position_controllers/JointPositionController"
+  joint: left_back_leg_joint_3
+
 left_mid_leg_1_controller:
   type: "position_controllers/JointPositionController"
   joint: left_mid_leg_joint_1
@@ -17,6 +21,10 @@ left_mid_leg_1_controller:
 left_mid_leg_2_controller:
   type: "position_controllers/JointPositionController"
   joint: left_mid_leg_joint_2
+
+left_mid_leg_3_controller:
+  type: "position_controllers/JointPositionController"
+  joint: left_mid_leg_joint_3
 
 left_front_leg_1_controller:
   type: "position_controllers/JointPositionController"
@@ -26,6 +34,10 @@ left_front_leg_2_controller:
   type: "position_controllers/JointPositionController"
   joint: left_front_leg_joint_2
 
+left_front_leg_3_controller:
+  type: "position_controllers/JointPositionController"
+  joint: left_front_leg_joint_3
+
 right_back_leg_1_controller:
   type: "position_controllers/JointPositionController"
   joint: right_back_leg_joint_1
@@ -33,6 +45,10 @@ right_back_leg_1_controller:
 right_back_leg_2_controller:
   type: "position_controllers/JointPositionController"
   joint: right_back_leg_joint_2
+
+right_back_leg_3_controller:
+  type: "position_controllers/JointPositionController"
+  joint: right_back_leg_joint_3
 
 right_mid_leg_1_controller:
   type: "position_controllers/JointPositionController"
@@ -42,6 +58,10 @@ right_mid_leg_2_controller:
   type: "position_controllers/JointPositionController"
   joint: right_mid_leg_joint_2
 
+right_mid_leg_3_controller:
+  type: "position_controllers/JointPositionController"
+  joint: right_mid_leg_joint_3
+
 right_front_leg_1_controller:
   type: "position_controllers/JointPositionController"
   joint: right_front_leg_joint_1
@@ -49,3 +69,7 @@ right_front_leg_1_controller:
 right_front_leg_2_controller:
   type: "position_controllers/JointPositionController"
   joint: right_front_leg_joint_2
+
+right_front_leg_3_controller:
+  type: "position_controllers/JointPositionController"
+  joint: right_front_leg_joint_3
