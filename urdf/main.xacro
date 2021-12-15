@@ -41,7 +41,16 @@
 	  izz="${mass / 12.0 * (robot_body_width*robot_body_width + (robot_body_width*3)*(3*robot_body_width))}"/>
         </inertial>
     </link>
-    
+
+<gazebo reference="base_link">
+  <kp>1000000.0</kp>
+  <kd>1.0</kd>
+  <mu1>0.8</mu1>
+  <mu2>0.8</mu2>
+  <maxVel>0.0</maxVel>
+  <minDepth>0.001</minDepth>
+</gazebo>
+
     <xacro:leg prefix="left_back" position="-1" reflect="1" mirror="0" />
     <xacro:leg prefix="left_mid" position="0" reflect="1" mirror="0" />
     <xacro:leg prefix="left_front" position="1" reflect="1" mirror="0" />

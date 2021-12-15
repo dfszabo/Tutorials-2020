@@ -27,34 +27,33 @@
       <origin xyz="0 0 ${-leg_height/10 - axel_offset}" rpy="0 0 0"/>
       <mass value="${mass}"/>
       <inertia
+	  ixx="${mass / 12.0 * (leg_width*leg_width + leg_height*leg_height/25)}" ixy="0.0" ixz="0.0"
+	  iyy="${mass / 12.0 * (leg_height*leg_height/25 + leg_width*leg_width)}" iyz="0.0"
+	  izz="${mass / 12.0 * (leg_width*leg_width + leg_width*leg_width)}"/>
+    <!--
+      <inertia
 	  ixx="1.0" ixy="0.0" ixz="0.0"
 	  iyy="1.0" iyz="0.0"
 	  izz="1.0"/>
-    </inertial>
+    -->
+
+      </inertial>
   </link>
 
-  <joint name="${prefix}_leg_joint_1" type="continuous">
-    <parent link="base_link"/>
-    <child link="${prefix}_leg"/>
-    <origin xyz="${position * robot_body_width} ${reflect * robot_body_width/2}
-    ${start_height + robot_body_height/2 - axel_offset}" rpy="${1 * PI/2} 0 ${mirror * PI}"/>
-    <axis xyz="1 0 0"/>
-    <limit effort="30" velocity="0.1"/>
-    <dynamics damping="0.7" friction="0.1"/>
-  </joint>
+
 
   <!-- leg_1_link_1 -->
   <link name="${prefix}_leg_link_1">
 
     <collision>
-      <origin xyz="${leg_width/2} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
+      <origin xyz="${leg_width/2 + axel_offset} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
       <geometry>
 	      <box size="${leg_width} ${leg_width} ${leg_height}"/>
       </geometry>
     </collision>
 
     <visual>
-      <origin xyz="${leg_width/2} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
+      <origin xyz="${leg_width/2 + axel_offset} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
       <geometry>
 	      <box size="${leg_width} ${leg_width} ${leg_height}"/>
       </geometry>
@@ -62,15 +61,73 @@
     </visual>
 
     <inertial>
-      <origin xyz="${leg_width/2} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
+      <origin xyz="${leg_width/2 + axel_offset} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
       <mass value="${mass}"/>
+      <inertia
+	  ixx="${mass / 12.0 * (leg_width*leg_width + leg_height*leg_height)}" ixy="0.0" ixz="0.0"
+	  iyy="${mass / 12.0 * (leg_height*leg_height + leg_width*leg_width)}" iyz="0.0"
+	  izz="${mass / 12.0 * (leg_width*leg_width + leg_width*leg_width)}"/>
+    <!--
       <inertia
 	  ixx="1.0" ixy="0.0" ixz="0.0"
 	  iyy="1.0" iyz="0.0"
 	  izz="1.0"/>
+    -->
+
     </inertial>
 
   </link>
+
+
+
+  <!-- leg_1_link_2 -->
+  <link name="${prefix}_leg_link_2">
+
+    
+    <collision>
+      <origin xyz="${leg_width/2 + axel_offset} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
+      <geometry>
+	      <box size="${leg_width} ${leg_width} ${leg_height}"/>
+      </geometry>
+    </collision>
+    
+    <visual>
+      <origin xyz="${leg_width/2 + axel_offset} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
+      <geometry>
+	      <box size="${leg_width} ${leg_width} ${leg_height}"/>
+      </geometry>
+      <material name="orange"/>
+    </visual>
+
+    <inertial>
+      <origin xyz="${leg_width/2 + axel_offset} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
+      <mass value="${mass}"/>
+      
+      <inertia
+	  ixx="${mass / 12.0 * (leg_width*leg_width + leg_height*leg_height)}" ixy="0.0" ixz="0.0"
+	  iyy="${mass / 12.0 * (leg_height*leg_height + leg_width*leg_width)}" iyz="0.0"
+	  izz="${mass / 12.0 * (leg_width*leg_width + leg_width*leg_width)}"/>
+    <!--
+      <inertia
+	  ixx="1.0" ixy="0.0" ixz="0.0"
+	  iyy="1.0" iyz="0.0"
+	  izz="1.0"/>
+    -->
+    </inertial>
+
+  </link>
+
+
+
+
+  <joint name="${prefix}_leg_joint_1" type="continuous">
+    <parent link="base_link"/>
+    <child link="${prefix}_leg"/>
+    <origin xyz="${position * robot_body_width} ${reflect * robot_body_width/2}
+    ${start_height + robot_body_height/2 - axel_offset}" rpy="${1 * PI/2} 0 ${mirror * PI}"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="1000" velocity="0.5"/>
+  </joint>
 
   <joint name="${prefix}_leg_joint_2" type="continuous">
     <parent link="${prefix}_leg"/>
@@ -78,47 +135,16 @@
     <origin xyz="${leg_width/2 - (mirror * leg_width)} 0 ${-leg_height/5 + leg_width/2 - axel_offset}" rpy="0 0 ${mirror * PI}"/>
     <!-- <origin xyz="${leg_width/2} 0 ${-leg_height + leg_width/2}" rpy="3pi/2 0 0"/> -->
     <axis xyz="1 0 0"/>
-    <limit effort="30" velocity="0.03"/>
-    <dynamics damping="0.7" friction="0.1"/>
+    <limit effort="1000" velocity="0.5"/>
   </joint>
-
-  <!-- leg_1_link_2 -->
-  <link name="${prefix}_leg_link_2">
-
-    <collision>
-      <origin xyz="${leg_width/2} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
-      <geometry>
-	      <box size="${leg_width} ${leg_width} ${leg_height}"/>
-      </geometry>
-    </collision>
-
-    <visual>
-      <origin xyz="${leg_width/2} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
-      <geometry>
-	      <box size="${leg_width} ${leg_width} ${leg_height}"/>
-      </geometry>
-      <material name="orange"/>
-    </visual>
-
-    <inertial>
-      <origin xyz="${leg_width/2} 0 ${-leg_height/2 + leg_width/2}" rpy="0 0 0"/>
-      <mass value="${mass}"/>
-      <inertia
-	  ixx="1.0" ixy="0.0" ixz="0.0"
-	  iyy="1.0" iyz="0.0"
-	  izz="1.0"/>
-    </inertial>
-
-  </link>
 
   <joint name="${prefix}_leg_joint_3" type="continuous">
     <parent link="${prefix}_leg_link_1"/>
     <child link="${prefix}_leg_link_2"/>
-    <origin xyz="${-leg_width} 0 ${-leg_height + leg_width}" rpy="${-PI/2 + (mirror * PI)} 0 0"/>
+    <origin xyz="${axel_offset} 0 ${-leg_height + leg_width}" rpy="${-PI/2 + (mirror * PI)} ${PI} 0"/>
     <!-- <origin xyz="${leg_width/2} 0 ${-leg_height + leg_width/2}" rpy="3pi/2 0 0"/> -->
     <axis xyz="1 0 0"/>
-    <limit effort="30" velocity="0.03"/>
-    <dynamics damping="0.7" friction="0.1"/>
+    <limit effort="1000" velocity="0.5"/>
   </joint>
 
     <transmission name="${prefix}_leg_transmission_1">
@@ -151,7 +177,8 @@
         </joint>
     </transmission>
 
-<gazebo reference="${prefix}_leg_joint_1">
+
+<gazebo reference="${prefix}_leg">
   <kp>1000000.0</kp>
   <kd>1.0</kd>
   <mu1>0.8</mu1>
@@ -160,7 +187,7 @@
   <minDepth>0.001</minDepth>
 </gazebo>
 
-<gazebo reference="${prefix}_leg_joint_2">
+<gazebo reference="${prefix}_leg_link_1">
   <kp>1000000.0</kp>
   <kd>1.0</kd>
   <mu1>0.8</mu1>
@@ -169,7 +196,7 @@
   <minDepth>0.001</minDepth>
 </gazebo>
 
-<gazebo reference="${prefix}_leg_joint_3">
+<gazebo reference="${prefix}_leg_link_2">
   <kp>1000000.0</kp>
   <kd>1.0</kd>
   <mu1>0.8</mu1>
@@ -177,6 +204,7 @@
   <maxVel>0.0</maxVel>
   <minDepth>0.001</minDepth>
 </gazebo>
+
 
 </xacro:macro>
 </robot>
