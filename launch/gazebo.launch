@@ -44,21 +44,27 @@
               left_back_leg_1_controller
               left_back_leg_2_controller
               left_back_leg_3_controller
+              left_back_leg_4_controller
               left_mid_leg_1_controller
               left_mid_leg_2_controller
               left_mid_leg_3_controller
+              left_mid_leg_4_controller
               left_front_leg_1_controller
               left_front_leg_2_controller
               left_front_leg_3_controller
+              left_front_leg_4_controller
               right_back_leg_1_controller
               right_back_leg_2_controller
               right_back_leg_3_controller
+              right_back_leg_4_controller
               right_mid_leg_1_controller
               right_mid_leg_2_controller
               right_mid_leg_3_controller
+              right_mid_leg_4_controller
               right_front_leg_1_controller
               right_front_leg_2_controller
-              right_front_leg_3_controller"
+              right_front_leg_3_controller
+              right_front_leg_4_controller"
   />
 </launch>
 

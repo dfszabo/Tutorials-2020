@@ -64,6 +64,13 @@ int main(int argc, char **argv) {
   std_msgs::Float64 msg_right_mid_2;
   std_msgs::Float64 msg_right_front_2;
 
+  std_msgs::Float64 msg_left_back_3;
+  std_msgs::Float64 msg_left_mid_3;
+  std_msgs::Float64 msg_left_front_3;
+  std_msgs::Float64 msg_right_back_3;
+  std_msgs::Float64 msg_right_mid_3;
+  std_msgs::Float64 msg_right_front_3;
+
   int state = -1;
   while (ros::ok()) {
 
@@ -71,24 +78,24 @@ int main(int argc, char **argv) {
     // pick up 3 leg 1-2
     case 0: {
       std::cout << "case 0\n";
-      msg_left_back_2.data = PI / 12;
-      msg_left_mid_2.data = PI / 12;
-      msg_left_front_2.data = PI / 12;
-      msg_right_back_2.data = -PI / 12;
-      msg_right_mid_2.data = -PI / 12;
-      msg_right_front_2.data = -PI / 12;
+      msg_left_back_3.data = PI / 10;
+      msg_left_mid_3.data = PI / 10;
+      msg_left_front_3.data = PI / 10;
+      msg_right_back_3.data = -PI / 10;
+      msg_right_mid_3.data = -PI / 10;
+      msg_right_front_3.data = -PI / 10;
 
-      left_back_leg_2.publish(msg_left_back_2);
-      right_mid_leg_2.publish(msg_right_mid_2);
-      left_front_leg_2.publish(msg_left_front_2);
+      left_back_leg_3.publish(msg_left_back_3);
+      right_mid_leg_3.publish(msg_right_mid_3);
+      left_front_leg_3.publish(msg_left_front_3);
       break;
     }
     // move backward the 3 leg which is in the air (preparing for propellation forward)
     case 1: {
       std::cout << "case 1\n";
-      msg_left_back_1.data = -PI / 12;
-      msg_left_front_1.data = -PI / 12;
-      msg_right_mid_1.data = PI / 12;
+      msg_left_back_1.data = -PI / 10;
+      msg_left_front_1.data = -PI / 10;
+      msg_right_mid_1.data = PI / 10;
 
       left_back_leg_1.publish(msg_left_back_1);
       right_mid_leg_1.publish(msg_right_mid_1);
@@ -101,7 +108,26 @@ int main(int argc, char **argv) {
              // base position of the robot
     case 4:
     case 2: {
+      // put down 3 leg 1-2
       std::cout << "case 2,4\n";
+      msg_left_back_3.data = 0;
+      msg_left_front_3.data = 0;
+      msg_right_mid_3.data = 0;
+
+      left_back_leg_3.publish(msg_left_back_3);
+      right_mid_leg_3.publish(msg_right_mid_3);
+      left_front_leg_3.publish(msg_left_front_3);
+
+      // put down 3 leg 2-1
+      msg_left_mid_3.data = 0;
+      msg_right_back_3.data = 0;
+      msg_right_front_3.data = 0;
+
+      right_back_leg_3.publish(msg_right_back_3);
+      left_mid_leg_3.publish(msg_left_mid_3);
+      right_front_leg_3.publish(msg_right_front_3);
+
+      // rotate the leg also
       msg_left_back_2.data = 0;
       msg_left_front_2.data = 0;
       msg_right_mid_2.data = 0;
@@ -114,22 +140,40 @@ int main(int argc, char **argv) {
     // lift body by using these 3 legs
     case 3: {
       std::cout << "case 3\n";
-      msg_left_back_2.data = -PI / 12;
-      msg_left_front_2.data = -PI / 12;
-      msg_right_mid_2.data = PI / 12;
+      msg_left_back_3.data = -PI / 10;
+      msg_left_front_3.data = -PI / 10;
+      msg_right_mid_3.data = PI / 10;
 
-      left_back_leg_2.publish(msg_left_back_2);
-      right_mid_leg_2.publish(msg_right_mid_2);
-      left_front_leg_2.publish(msg_left_front_2);
+      left_back_leg_3.publish(msg_left_back_3);
+      right_mid_leg_3.publish(msg_right_mid_3);
+      left_front_leg_3.publish(msg_left_front_3);
       
       // move forward up 3 leg 1-2
-      msg_left_back_1.data = PI / 12;
-      msg_left_front_1.data = PI / 12;
-      msg_right_mid_1.data = -PI / 12;
+      msg_left_back_1.data = PI / 10;
+      msg_left_front_1.data = PI / 10;
+      msg_right_mid_1.data = -PI / 10;
 
       left_back_leg_1.publish(msg_left_back_1);
       right_mid_leg_1.publish(msg_right_mid_1);
       left_front_leg_1.publish(msg_left_front_1);
+
+      // rotate the leg also
+      msg_left_back_2.data = -PI / 8;
+      msg_left_front_2.data = -PI / 8;
+      msg_right_mid_2.data = PI / 8;
+
+      left_back_leg_2.publish(msg_left_back_2);
+      right_mid_leg_2.publish(msg_right_mid_2);
+      left_front_leg_2.publish(msg_left_front_2);
+
+      // move the other 3 legs as well up in the air a bit
+      msg_left_mid_3.data = PI / 10;
+      msg_right_back_3.data = -PI / 10;
+      msg_right_front_3.data = -PI / 10;
+
+      right_back_leg_3.publish(msg_right_back_3);
+      left_mid_leg_3.publish(msg_left_mid_3);
+      right_front_leg_3.publish(msg_right_front_3);
       break;
     }
     // move to original place the 3 leg 1-2
