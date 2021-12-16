@@ -4,7 +4,7 @@
   <xacro:property name="PI" value="3.1415926535897931"/>
   <xacro:property name="mass" value="0.01" /> <!-- arbitrary value for mass -->
   <xacro:property name="robot_body_width" value="1" /> <!-- Square dimensions (widthxwidth) of beams -->
-  <xacro:property name="start_height" value="0.7" /> <!-- Square dimensions (widthxwidth) of beams -->
+  <xacro:property name="start_height" value="0.0" /> <!-- Square dimensions (widthxwidth) of beams -->
   <xacro:property name="leg_width" value="0.2" /> 
   <xacro:property name="robot_body_height" value="0.3" /> <!-- Link 1 -->
   <xacro:property name="leg_height" value="1" /> <!-- Link 2 -->

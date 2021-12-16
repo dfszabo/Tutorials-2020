@@ -166,14 +166,6 @@ int main(int argc, char **argv) {
       right_mid_leg_2.publish(msg_right_mid_2);
       left_front_leg_2.publish(msg_left_front_2);
 
-      // move the other 3 legs as well up in the air a bit
-      msg_left_mid_3.data = PI / 10;
-      msg_right_back_3.data = -PI / 10;
-      msg_right_front_3.data = -PI / 10;
-
-      right_back_leg_3.publish(msg_right_back_3);
-      left_mid_leg_3.publish(msg_left_mid_3);
-      right_front_leg_3.publish(msg_right_front_3);
       break;
     }
     // move to original place the 3 leg 1-2
@@ -195,7 +187,7 @@ int main(int argc, char **argv) {
 
     state++;
 
-    ros::Duration(1.5).sleep();
+    ros::Duration(1.0).sleep();
   }
 
   return 0;
